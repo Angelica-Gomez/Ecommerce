@@ -1,0 +1,45 @@
+:root {
+  --clr-navbar: #5a5a5a;
+  --clr-navbar-light: #efdaf9;
+}
+
+.navbar {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--clr-navbar);
+  border-bottom: 3px solid black;
+}
+
+.navbar li {
+  color: white;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+}
+
+.menu {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.menu-link.cart {
+  margin-left: 50px;
+}
+
+.menu-link:hover {
+  text-decoration: underline;
+}
