@@ -1,0 +1,54 @@
+.footer {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: var(--clr-navbar);
+  border-top: 1px solid black;
+  color: white;
+}
+
+.footer-column {
+  flex-basis: 30%;
+  padding: 0 1rem;
+}
+
+.follow-us,
+.contact-us {
+  margin-bottom: 2rem;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-icons a:hover {
+  color: #1c54b2;
+  transition: transform 0.2s ease;
+}
+
+.footer-icons a:hover {
+  transform: scale(1.1);
+}
+
+.footer a {
+  color: white;
+}
+
+.footer h2 {
+  margin-bottom: 1rem;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+}
+
+.footer-copyright {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+}

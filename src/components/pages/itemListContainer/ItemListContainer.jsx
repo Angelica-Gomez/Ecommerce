@@ -1,8 +1,9 @@
 import ItemList from "./ItemList";
-import { getProducts } from "../../../productsMock";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
+import { CardSkeleton } from "../../common/CardSkeleton";
+import { db } from "../../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const { category } = useParams();
@@ -10,39 +11,74 @@ const ItemListContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    getProducts().then((resp) => {
-      if (category) {
-        const productsFilter = resp.filter(
-          (product) => product.category === category
-        );
-        setProducts(productsFilter);
-      } else {
-        setProducts(resp);
-      }
+    //setIsLoading(true);
+    //let productsCollection = collection(db, "products");
+    //getDocs(productsCollection)
+    //.then((res) => {
+    //let arraydesencriptado = res.docs.map((elemento) => {
+    //return { ...elemento.data(), id: elemento.id };
+    //});
+    //setProducts(arraydesencriptado);
+    //})
+    //.finally(() => setIsLoading(false));
+    let productsCollection = collection(db, "products");
 
-      setIsLoading(false);
-    });
+    let consulta = productsCollection;
+    if (category) {
+      let productsCollectionFiltered = query(
+        productsCollection,
+        where("category", "==", category)
+      );
+      consulta = productsCollectionFiltered;
+    }
+
+    getDocs(consulta)
+      .then((res) => {
+        let arraydesencriptado = res.docs.map((elemento) => {
+          return { ...elemento.data(), id: elemento.id };
+        });
+        setProducts(arraydesencriptado);
+      })
+      .finally(() => setIsLoading(false));
   }, [category]);
+
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex" }}>
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </div>
+    );
+  }
 
   return (
     <>
-      {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "200px",
-          }}
-        >
+      <ItemList products={products} />
+
+      {/* {isLoading ? (
+        <Box sx={{ display: "flex" }}>
           <CircularProgress />
-        </div>
+        </Box>
       ) : (
         <ItemList products={products} />
-      )}
+      )} */}
+
+      {/* <ItemList products={products} /> */}
+      {/* {
+      isLoading && <h1>Cargando</h1> 
+    } */}
     </>
   );
 };
 
 export default ItemListContainer;
+
+// const suma = ()=>{
+
+//   if(){
+//     return 2
+//   }
+
+//   return items
+// }

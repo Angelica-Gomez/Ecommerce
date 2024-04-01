@@ -1,0 +1,57 @@
+.main-title {
+  margin-top: 2rem;
+}
+.order {
+  margin-bottom: 550px;
+  margin-top: 20px;
+}
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.formulario input {
+  padding: 0.5rem;
+  width: 18rem;
+  border-radius: 0.5rem;
+  border: 2px solid black;
+}
+
+.formulario input:focus {
+  outline: 0;
+  border: 2px solid #1c54b2;
+  outline: 2px solid #1c54b2;
+}
+
+.enviar {
+  background-color: #5a5a5a;
+  border: 0;
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  border: 2px solid var(--clr-main);
+  transition: 0.2s;
+}
+
+.enviar:hover {
+  background-color: #1c54b2;
+  color: black;
+}
+
+.enviar {
+  width: auto;
+  height: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  margin-bottom: 200px;
+}

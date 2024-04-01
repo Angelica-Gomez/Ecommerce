@@ -1,21 +1,30 @@
-import { useEffect, useState } from "react";
-import { getProduct } from "../../../productsMock";
-import { useParams, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { ItemDetail } from "./ItemDetail";
-import CircularProgress from "@mui/material/CircularProgress";
+import { CartContext } from "../../../context/CartContext";
+import { db } from "../../../firebaseConfig";
+
+import { collection, doc, getDoc } from "firebase/firestore";
 
 export const ItemDetailContainer = () => {
   const { id } = useParams();
-  console.log(id);
 
   const [item, setItem] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { addToCart, getTotalQuantityById } = useContext(CartContext);
+
+  const initial = getTotalQuantityById(id);
+
   useEffect(() => {
-    getProduct(+id).then((resp) => {
-      setItem(resp);
-      setIsLoading(false);
-    });
+    setIsLoading(true);
+    let productsCollection = collection(db, "products");
+    let refDoc = doc(productsCollection, id);
+    getDoc(refDoc)
+      .then((res) => {
+        setItem({ ...res.data(), id: res.id });
+      })
+      .finally(() => setIsLoading(false));
   }, [id]);
 
   const onAdd = (cantidad) => {
@@ -23,24 +32,15 @@ export const ItemDetailContainer = () => {
       ...item,
       quantity: cantidad,
     };
-    console.log(infoProducto);
+    addToCart(infoProducto);
   };
 
   return (
     <>
       {isLoading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "200px",
-          }}
-        >
-          <CircularProgress />
-        </div>
+        <h2>Cargando producto...</h2>
       ) : (
-        <ItemDetail item={item} onAdd={onAdd} />
+        <ItemDetail item={item} onAdd={onAdd} initial={initial} />
       )}
     </>
   );

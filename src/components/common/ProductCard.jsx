@@ -42,11 +42,11 @@ export const ProductCard = ({ img, title, description, price, id }) => {
         >
           {title}
         </Typography>
-        <Typography variant="h6" color="text.secondary" textAlign={"center"}>
+        <Typography variant="h7" color="text.secondary" textAlign={"center"}>
           {description}
         </Typography>
-        <Typography variant="subtitle1" textAlign={"center"}>
-          ${price}.-
+        <Typography variant="h6" textAlign={"center"}>
+          ${price}
         </Typography>
       </CardContent>
       <CardActions style={{ display: "flex", justifyContent: "center" }}>
@@ -54,7 +54,11 @@ export const ProductCard = ({ img, title, description, price, id }) => {
           <Button
             variant="contained"
             size="small"
-            sx={{ color: "darkblue", fontWeight: "bold" }}
+            sx={{
+              color: "white",
+              fontWeight: "bold",
+              backgroundColor: "#B5C0D0",
+            }}
           >
             Ver detalle
           </Button>

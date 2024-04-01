@@ -1,6 +1,5 @@
 :root {
   --clr-navbar: #5a5a5a;
-  --clr-navbar-light: #efdaf9;
 }
 
 .navbar {
@@ -9,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--clr-navbar);
-  border-bottom: 3px solid black;
+  border-bottom: 1px solid black;
 }
 
 .navbar li {
@@ -19,6 +18,11 @@
 .logo {
   text-decoration: none;
   color: white;
+}
+
+.logo img {
+  width: 12rem;
+  height: 6rem;
 }
 
 .menu {
